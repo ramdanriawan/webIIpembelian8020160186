@@ -16,16 +16,22 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->middleware('auth')->group(function(){
-     Route::get('','PelangganController@index')->name('pelanggan_index');
-     Route::get('pelanggan','PelangganController@index')->name('pelanggan_index');
-     Route::get('pelanggan/tambah','PelangganController@create');
-     Route::post('store','PelangganController@store');
+    Route::resource('pelanggan', 'Pelanggan\PelangganController');
+    Route::resource('barang', 'Barang\BarangController');
+});
 
-     //data barang
-     Route::get('barang', 'BarangController@index')->name('barang_index');
-     Route::get('barang/tambah', 'BarangController@create')->name('tambah_barang');
-     Route::post('barang/store', 'BarangController@store')->name('store_barang');
- });
+//dari pak abdul rahim
+// Route::prefix('admin')->middleware('auth')->group(function(){
+//      Route::get('','PelangganController@index')->name('pelanggan_index');
+//      Route::get('pelanggan','PelangganController@index')->name('pelanggan_index');
+//      Route::get('pelanggan/tambah','PelangganController@create');
+//      Route::post('store','PelangganController@store');
+//
+//      //data barang
+//      Route::get('barang', 'BarangController@index')->name('barang_index');
+//      Route::get('barang/tambah', 'BarangController@create')->name('tambah_barang');
+//      Route::post('barang/store', 'BarangController@store')->name('store_barang');
+//  });
 
 Route::get('/login', function(){
 	return "ini halaman login";
