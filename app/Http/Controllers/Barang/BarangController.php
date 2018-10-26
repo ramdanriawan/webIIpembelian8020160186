@@ -9,14 +9,17 @@ use App\Http\Controllers\Controller;
 
 class BarangController extends Controller
 {
+
+
     public function __construct()
     {
-        $this->settingan = new Settingan('barang');
-        $this->settingan->model = new Barang();
+
+        $this->settingan = new Settingan('barang', new Barang());
         $this->settingan->setValidateRules = [
-            'nama' => 'required|min:2|max:50',
+            'nama' => 'required|min:2|max:50|alpha',
             'harga_jual' => 'required|numeric',
-            'stok' => 'required|numeric'
+            'stok' => 'required|numeric',
+            'gambar.0' => 'required|mimes:jpg,png,jpeg,gif|max:1000',
         ];
     }
 
@@ -50,7 +53,7 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
         return $this->settingan->setStore($request);
     }
 

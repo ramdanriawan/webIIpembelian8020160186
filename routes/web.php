@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/uploadfileget', function(){return view('uploadfile');});
+Route::resource('uploadfile', 'UploadFileController');
+
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::resource('pelanggan', 'Pelanggan\PelangganController');
     Route::resource('barang', 'Barang\BarangController');

@@ -37,10 +37,10 @@
                             @endif;
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar*</label>
-                            <input class="form-control" type="file" name="gambar" value="{{$barang->gambar}}" placeholder="Stok" required>
-                            @if($errors->has('gambar'))
-                            <p class="alert alert-danger">{{$errors->first('gambar')}}</p>
+                            <label for="gambar">Gambar (tandai beberapa sekaligus)</label>
+                            <input class="form-control" type="file" name="gambar[0]" required multiple>
+                            @if($errors->has('gambar.0'))
+                            <p class="alert alert-danger">{{$errors->first('gambar.0')}}</p>
                             @endif;
                         </div>
 

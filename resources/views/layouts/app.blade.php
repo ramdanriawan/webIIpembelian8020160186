@@ -41,7 +41,7 @@
                             Data Master <span class="caret"></span>
                         </a>
                            <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ url('admin/pelanggan/tambah') }}">
+                            <a class="dropdown-item" href="{{ url('admin/pelanggan/create') }}">
                                 Tambah Pelanggan
                             </a>
                             <a class="dropdown-item" href="{{ url('admin/pelanggan') }}">
@@ -50,7 +50,7 @@
                             <a class="dropdown-item" href="{{ url('admin/barang') }}">
                                 Data Barang
                             </a>
-                            <a class="dropdown-item" href="{{ url('admin/barang/tambah') }}">
+                            <a class="dropdown-item" href="{{ url('admin/barang/create') }}">
                                 Tambah Barang
                             </a>
                           </div>
