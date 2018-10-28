@@ -10,7 +10,7 @@
                 @include('layouts.partials.success')
 
 
-                <div class="card-header">Data Pelanggan</div>
+                <div class="card-header">{{$judul}}</div>
 
                 <div class="card-body">
                    <table class="table table-bordered table-hover">

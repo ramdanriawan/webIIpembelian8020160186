@@ -11,13 +11,9 @@ class PelangganController extends Controller
 {
     public function __construct()
     {
-        $this->settingan = new Settingan('pelanggan');
-        $this->settingan->model = new Pelanggan();
-        $this->settingan->setValidateRules = [
-            'nama' => 'required|min:2|max:50',
-            'alamat' => 'required|min:2|max:255'
-        ];
+        $this->settingan = new Settingan('pelanggan', new Pelanggan());
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +21,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
+        $this->settingan->allData['judul'] = 'woke';
         //
         return $this->settingan->setIndex();
     }
@@ -37,6 +34,8 @@ class PelangganController extends Controller
     public function create()
     {
         //
+        $this->settingan->allData['judul'] = 'woke';
+        
         return $this->settingan->setCreate();
     }
 
@@ -73,6 +72,7 @@ class PelangganController extends Controller
     public function edit(Pelanggan $pelanggan)
     {
         //
+        $this->settingan->allData['judul'] = 'wokelah';
         return $this->settingan->setEdit($pelanggan);
     }
 

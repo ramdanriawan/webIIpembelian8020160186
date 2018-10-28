@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -41,11 +42,11 @@
                             Data Master <span class="caret"></span>
                         </a>
                            <div class="dropdown-menu">
+                           <a class="dropdown-item" href="{{ url('admin/pelanggan') }}">
+                               Data Pelanggan
+                           </a>
                             <a class="dropdown-item" href="{{ url('admin/pelanggan/create') }}">
                                 Tambah Pelanggan
-                            </a>
-                            <a class="dropdown-item" href="{{ url('admin/pelanggan') }}">
-                                Data Pelanggan
                             </a>
                             <a class="dropdown-item" href="{{ url('admin/barang') }}">
                                 Data Barang

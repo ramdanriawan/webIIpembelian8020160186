@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Tambah data barang</div>
+                <div class="card-header">{{$judul}}</div>
                 <div class="card-body">
 
                     @include('layouts.partials.errors')
@@ -17,37 +17,38 @@
 
                         <div class="form-group">
                             <label for="nama">Nama*</label>
-                            <input class="form-control" type="text" name="nama" value="{{$barang->nama}}" placeholder="nama" required>
+                            <input class="form-control {{$errors->has('nama') ? 'is-invalid': ''}}" type="text" name="nama" value="{{$barang->nama}}" placeholder="nama" required>
                             @if($errors->has('nama'))
-                            <p class="alert alert-danger">{{$errors->first('nama')}}</p>
-                            @endif;
+                            <p class="text-danger">{{$errors->first('nama')}}</p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="harga_jual">Harga Jual*</label>
-                            <input class="form-control" type="number" name="harga_jual" value="{{$barang->harga_jual}}" placeholder="Harga Jual" required>
+                            <input class="form-control {{$errors->has('harga_jual') ? 'is-invalid': ''}}" type="number" name="harga_jual" value="{{$barang->harga_jual}}" placeholder="Harga Jual" required>
                             @if($errors->has('harga_jual'))
-                            <p class="alert alert-danger">{{$errors->first('harga_jual')}}</p>
-                            @endif;
+                            <p class="text-danger">{{$errors->first('harga_jual')}}</p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="stok">Stok*</label>
-                            <input class="form-control" type="number" name="stok" value="{{$barang->stok}}" placeholder="Stok" required>
+                            <input class="form-control  {{$errors->has('stok') ? 'is-invalid': ''}}" type="number" name="stok" value="{{$barang->stok}}" placeholder="Stok" required>
                             @if($errors->has('stok'))
-                            <p class="alert alert-danger">{{$errors->first('stok')}}</p>
-                            @endif;
+                            <p class="text-danger">{{$errors->first('stok')}}</p>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar (tandai beberapa sekaligus)</label>
-                            <input class="form-control" type="file" name="gambar[0]" required multiple>
-                            @if($errors->has('gambar.0'))
-                            <p class="alert alert-danger">{{$errors->first('gambar.0')}}</p>
-                            @endif;
+                            <label for="gambar">Gambar (tandai beberapa sekaligus), max:5</label>
+                            <input class="form-control  {{$errors->has('gambar') || $errors->has('gambar.*') ? 'is-invalid': ''}}" type="file" name="gambar[]" required multiple>
+                            @if($errors->has('gambar.*'))
+                            <p class="text-danger">{{$errors->first('gambar.*')}}</p>
+                            <p class="text-danger">{{$errors->first('gambar')}}</p>
+                            @endif
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-sm">
                             Simpan data barang
                         </button>
-                        <button type="reset" class="btn btn-danger"
+                        <button type="reset" class="btn btn-danger btn-sm"
                                 onclick='
                                     if(!confirm("Apakah anda yakin akan mereset data ini?"))
                                     {

@@ -13,14 +13,7 @@ class BarangController extends Controller
 
     public function __construct()
     {
-
         $this->settingan = new Settingan('barang', new Barang());
-        $this->settingan->setValidateRules = [
-            'nama' => 'required|min:2|max:50|alpha',
-            'harga_jual' => 'required|numeric',
-            'stok' => 'required|numeric',
-            'gambar.0' => 'required|mimes:jpg,png,jpeg,gif|max:1000',
-        ];
     }
 
     /**
@@ -31,6 +24,7 @@ class BarangController extends Controller
     public function index()
     {
         //
+        $this->settingan->allData['judul'] = 'halaman gue';
         return $this->settingan->setIndex();
     }
 
@@ -42,6 +36,7 @@ class BarangController extends Controller
     public function create()
     {
         //
+        $this->settingan->allData['judul'] = 'entah apalah';
         return $this->settingan->setCreate();
     }
 
@@ -78,6 +73,7 @@ class BarangController extends Controller
     public function edit(Barang $barang)
     {
         //
+        $this->settingan->allData['judul'] = 'iyolah';
         return $this->settingan->setEdit($barang);
     }
 
