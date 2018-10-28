@@ -13,7 +13,7 @@ class Settingan extends Model
         $this->setValidateRules = [
             //untuk form barang
             'barang' => [
-                'nama' => 'required|min:2|max:50|alpha|present:alpha', //alpha sebagai penanda saja untuk pembuangan spasi pada method setValidate();
+                'nama' => 'required|min:2|max:50|alpha_num|present:alpha', //alpha sebagai penanda saja untuk pembuangan spasi pada method setValidate();
                 'harga_jual' => 'required|numeric|digits_between:3,8|min:500|max:10000000',
                 'stok' => 'required|numeric|digits_between:1,4|min:1|max:1000',
                 'gambar' => 'max:5',
@@ -39,7 +39,7 @@ class Settingan extends Model
         $this->controller         = new Controller();
 
         //nilai untuk setting pagination setiap halaman dari kumpulan data
-        $this->paginate           = 10;
+        $this->paginate           = 0;
 
         //nilai untuk setting halaman create data
         $this->halamanCreate      = "$this->halaman.create";
@@ -66,13 +66,13 @@ class Settingan extends Model
         $this->error              = 'errorr';
 
         //nilai untuk setting pesan jika berhasil menghapus data
-        $this->successDelete      = "Berhasil menghapus data $this->halaman";
+        $this->successDelete      = "Berhasil menghapus data $this->halaman {$this->model->nama}";
 
         //nilai untuk setting pesan jika berhasil menyimpan data
-        $this->successStore       = "Berhasil menambah data $this->halaman";
+        $this->successStore       = "Berhasil menambah data $this->halaman {$this->model->nama}";
 
         //nilai untuk setting pesan jika berhasil mengedit data
-        $this->successEdit        = "Berhasil mengedit data $this->halaman";
+        $this->successEdit        = "Berhasil mengedit data $this->halaman {$this->model->nama}";
 
         //nilai untuk mendefinisikan nama inputan form untuk upload gambar
         $this->gambarInput        = 'gambar';
@@ -80,6 +80,8 @@ class Settingan extends Model
         //nilai untuk mendefiniskan folder tempat dimana gambar akan diupload
         $this->gambarFolder       = 'gambar/';
 
+        //nilai untuk mengganti slash pada url
+        $this->slashUrl = '/';
 
         //nilai untuk setting dimana folder root gambar
         $this->gambarIndexAt = '\\';
@@ -161,7 +163,7 @@ class Settingan extends Model
             }
 
             //ubah nilai bawaan gambar menjadi json dan buang double backslashnya jika ada
-            $dataRequest[$this->gambarInput] = str_replace('\\\\', '\\',  json_encode($this->gambarData));
+            $dataRequest[$this->gambarInput] = str_replace('\\\\', $this->slashUrl,  json_encode($this->gambarData));
         }
 
         $this->model->create($dataRequest)->save();
@@ -196,7 +198,7 @@ class Settingan extends Model
             }
 
             //ubah nilai bawaan gambar menjadi json dan buang double backslashnya supaya bisa diinput ke database
-            $dataRequest[$this->gambarInput] = str_replace('\\\\', '\\',  json_encode($this->gambarData));
+            $dataRequest[$this->gambarInput] = str_replace('\\\\', $this->slashUrl,  json_encode($this->gambarData));
         }
 
         //buang data yang mengandung excep input
