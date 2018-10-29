@@ -11,7 +11,6 @@
 
 
                 <div class="card-header">{{$judul}}</div>
-                {{-- <button id='hapussemua'>hapus</button> --}}
 
                 <div class="card-body table-responsive">
                    <table  id='dataTables' class="table table-bordered table-striped table-hover table-condensed table-sm">
@@ -30,7 +29,7 @@
                          @foreach($barangs as $barang)
                            <tr>
                                 <td></td>
-                                <td>{{ $loop->iteration }}</td>
+                                <th class='text-center'>{{ $loop->iteration }}</th>
                                <td><a href="/admin/barang/{{$barang->id}}">{{ $barang->nama }}</a></td>
                                <td>{{ $barang->harga_jual }}</td>
                                <td>{{ $barang->stok }}</td>
