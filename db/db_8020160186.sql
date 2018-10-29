@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2018 at 04:07 PM
+-- Generation Time: Oct 29, 2018 at 06:03 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -33,7 +33,7 @@ CREATE TABLE `barangs` (
   `nama` varchar(255) NOT NULL,
   `harga_jual` int(10) NOT NULL,
   `stok` int(10) NOT NULL,
-  `gambar` varchar(255) NOT NULL,
+  `gambar` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -43,10 +43,8 @@ CREATE TABLE `barangs` (
 --
 
 INSERT INTO `barangs` (`id`, `nama`, `harga_jual`, `stok`, `gambar`, `created_at`, `updated_at`) VALUES
-(1, 'sdfdsf', 10000, 10, 'dimana.jpg', '2018-10-23 13:46:19', '2018-10-23 13:46:19'),
-(2, 'fhf', 10000, 10, 'gakjhk', '2018-10-23 13:47:43', '2018-10-23 13:47:43'),
-(3, 'ini apalah', 10000, 10, 'barang/apalah.jpg', '2018-10-23 13:53:43', '2018-10-23 13:53:43'),
-(4, 'sdf', 10000, 10, 'barang/screen.png', '2018-10-23 13:57:03', '2018-10-23 13:57:03');
+(85, 'asdasd', 2000, 1000, '{\"url\":[\"/gambar/iphone1.jpg\",\"/gambar/iphone2.jpg\",\"/gambar/iphone3.jpg\",\"/gambar/iphone4.jpg\"]}', '2018-10-28 16:17:24', '2018-10-28 16:17:24'),
+(88, 'ramdan riawan', 1000, 1000, '{\"url\":[\"/gambar/iphone1.jpg\",\"/gambar/iphone2.jpg\",\"/gambar/iphone3.jpg\",\"/gambar/iphone4.jpg\"]}', '2018-10-28 16:19:41', '2018-10-28 16:19:41');
 
 -- --------------------------------------------------------
 
@@ -89,8 +87,6 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `pelanggans` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
   `alamat` longtext NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
@@ -100,26 +96,25 @@ CREATE TABLE `pelanggans` (
 -- Dumping data for table `pelanggans`
 --
 
-INSERT INTO `pelanggans` (`id`, `nama`, `username`, `password`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'ani', 'ramdan3mts', 'mautauajakamu98', 'ini di mana yaaa', '2018-10-17 00:00:00', NULL),
-(2, 'budi', '', '', 'budi d mana lagi yaa?', '2018-10-17 00:00:00', NULL),
-(3, 'tono', '', '', 'entah di mana lagi nih', '2018-10-17 00:00:00', NULL),
-(4, 'budi', '', '', 'budi d mana lagi yaa?', '2018-10-17 00:00:00', NULL),
-(5, 'tono', '', '', 'entah di mana lagi nih', '2018-10-17 00:00:00', NULL),
-(6, 'titi', '', '', 'duh kamu dimana sih??', '2018-10-17 00:00:00', NULL),
-(7, 'rasdf', '', '', 'sdf', '2018-10-23 08:58:19', '2018-10-23 08:58:19'),
-(8, 'sdfs', '', '', 'dsf', '2018-10-23 09:02:10', '2018-10-23 09:02:10'),
-(9, 'adfas', '', '', 'asdasd', '2018-10-23 09:06:27', '2018-10-23 09:06:27'),
-(10, 'sdfsf', '', '', 'sdfs', '2018-10-23 09:06:53', '2018-10-23 09:06:53'),
-(11, 'sdfdsf', '', '', 'sdfdsf', '2018-10-23 09:10:02', '2018-10-23 09:10:02'),
-(12, 'asdas', '', '', 'asdasd', '2018-10-23 09:10:22', '2018-10-23 09:10:22'),
-(13, 'xcxvxc', '', '', 'xcvxc', '2018-10-23 09:10:40', '2018-10-23 09:10:40'),
-(14, 'sdfdsf', '', '', 'sdfdsfdsf', '2018-10-23 09:11:16', '2018-10-23 09:11:16'),
-(15, 'dsfsd', '', '', 'fdsfds', '2018-10-23 09:11:42', '2018-10-23 09:11:42'),
-(16, 'dsfdsf', '', '', 'sdfsd', '2018-10-23 09:12:08', '2018-10-23 09:12:08'),
-(17, 'sdf', '', '', 'sdfds', '2018-10-23 09:12:27', '2018-10-23 09:12:27'),
-(18, 'sdfsd', '', '', 'dsf', '2018-10-23 09:20:17', '2018-10-23 09:20:17'),
-(19, 'asdfsa', '', '', 'asdasd', '2018-10-23 09:22:15', '2018-10-23 09:22:15');
+INSERT INTO `pelanggans` (`id`, `nama`, `alamat`, `created_at`, `updated_at`) VALUES
+(9, 'adfas asdfsf', 'asdasdfasdfasfasdfasdfasdasdasdsa', '2018-10-23 09:06:27', '2018-10-27 17:11:06'),
+(10, 'sdfsf', 'sdfs', '2018-10-23 09:06:53', '2018-10-23 09:06:53'),
+(11, 'sdfdsf', 'sdfdsf', '2018-10-23 09:10:02', '2018-10-23 09:10:02'),
+(12, 'asdas', 'asdasd', '2018-10-23 09:10:22', '2018-10-23 09:10:22'),
+(13, 'xcxvxc', 'xcvxc', '2018-10-23 09:10:40', '2018-10-23 09:10:40'),
+(14, 'sdfdsf', 'sdfdsfdsf', '2018-10-23 09:11:16', '2018-10-23 09:11:16'),
+(15, 'dsfsd', 'fdsfds', '2018-10-23 09:11:42', '2018-10-23 09:11:42'),
+(16, 'dsfdsf', 'sdfsd', '2018-10-23 09:12:08', '2018-10-23 09:12:08'),
+(17, 'sdf', 'sdfds', '2018-10-23 09:12:27', '2018-10-23 09:12:27'),
+(18, 'sdfsd', 'dsf', '2018-10-23 09:20:17', '2018-10-23 09:20:17'),
+(19, 'asdfsa', 'asdasd', '2018-10-23 09:22:15', '2018-10-23 09:22:15'),
+(20, 'asda', 'asd', '2018-10-24 16:09:46', '2018-10-24 16:09:46'),
+(21, 'sdfds', 'dsfdsf', '2018-10-24 16:10:22', '2018-10-24 16:10:22'),
+(22, 'sdfds', 'sdf', '2018-10-24 16:18:56', '2018-10-24 16:18:56'),
+(23, 'dsfds', 'sdf', '2018-10-24 16:19:41', '2018-10-24 16:19:41'),
+(24, 'ini budi', 'rumah budi di mana lagi yaa??', '2018-10-25 05:53:10', '2018-10-25 05:53:10'),
+(25, 'dsfsfsdf', 'sdfsdfds', '2018-10-25 08:43:43', '2018-10-25 08:43:43'),
+(26, '123', '4567', '2018-10-25 14:10:11', '2018-10-25 14:10:11');
 
 -- --------------------------------------------------------
 
@@ -188,7 +183,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barangs`
 --
 ALTER TABLE `barangs`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -200,7 +195,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pelanggans`
 --
 ALTER TABLE `pelanggans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`

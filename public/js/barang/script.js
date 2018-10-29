@@ -2,7 +2,7 @@ $(document).ready(function() {
     //library dataTables
     var dataTablesString = '#dataTables';
     var dataTables = $(dataTablesString).DataTable({
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        // lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         columnDefs:[
             {
                 targets: 0,
