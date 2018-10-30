@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts Bawaan laravel -->
@@ -15,8 +14,6 @@
     <link href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 
     {{--  data tables --}}
-
-
     <script src="https://code.jquery.com/jquery-3.3.1.js" charset="utf-8"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" charset="utf-8"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js" charset="utf-8"></script>
@@ -39,7 +36,6 @@
 
     {{--  sweetalert --}}
     <script src="{{asset('node_modules/sweetalert2/dist/sweetalert2.all.min.js')}}" charset="utf-8"></script>
-
     <link rel="stylesheet" href="{{asset('node_modules/sweetalert2/dist/sweetalert2.min.css')}}">
 
     <!-- Fonts -->

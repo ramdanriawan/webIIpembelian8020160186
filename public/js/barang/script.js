@@ -2,7 +2,7 @@ $(document).ready(function() {
     //library dataTables
     var dataTablesString = '#dataTables';
     var dataTables = $(dataTablesString).DataTable({
-        // lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+         lengthMenu: [[10, 25, 50, -1], ['10 baris', '25 baris', '50 baris', "All"]],
         columnDefs:[
             {
                 targets: 0,
@@ -18,10 +18,10 @@ $(document).ready(function() {
             }
         ],
         select:{
-            style: 'multi',
+            style: 'multiple',
             selector: 'td:first-child'
         },
-        pageLength: 2,
+        pageLength: 5,
         dom:'Bfrtip',
         buttons: [
             {
@@ -60,6 +60,14 @@ $(document).ready(function() {
                 }
 
             },
+            {
+                extend: "pageLength",
+                text: `Baris`,
+                attr: {
+                    style:'background-color:#6c757d; font-weight:bold;',
+                    class:'dt-button ui-button ui-state-default ui-button-text-only btn-default'
+                }
+            },
 
         ],
         language: {
@@ -91,9 +99,18 @@ $(document).ready(function() {
 
         $(`#dataTables_wrapper input[type=search]`).addClass('form-control form-control-sm');
 
+        var data = null;
         $('#hapussemua').click( function () {
-            console.log($(`${dataTablesString} tbody tr[class *= 'selected']`));
             dataTables.rows('.selected').remove().draw();
+        });
+
+        $("#addBarang").click(function(event) {
+            //
+            location.href = '/admin/barang/create'
+        });
+        $("#showBarang").click(function(event) {
+            //
+            location.href = '/admin/barang'
         });
 
     //library sweetalert
