@@ -19,7 +19,11 @@ Route::get('/uploadfileget', function(){return view('uploadfile');});
 Route::resource('uploadfile', 'UploadFileController');
 
 Route::prefix('admin')->middleware('auth')->group(function(){
+    //pelanggan
     Route::resource('pelanggan', 'Pelanggan\PelangganController');
+
+    //barang
+    Route::get('barang/loadBarang', 'Barang\BarangController@loadBarang');
     Route::resource('barang', 'Barang\BarangController');
 });
 

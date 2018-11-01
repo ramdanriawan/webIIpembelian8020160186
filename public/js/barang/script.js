@@ -1,7 +1,7 @@
 $(document).ready(function() {
     //library dataTables
     var dataTablesString = '#dataTables';
-    var dataTables = $(dataTablesString).DataTable({
+    var dataTablesParams = {
          lengthMenu: [[10, 25, 50, -1], ['10 baris', '25 baris', '50 baris', "All"]],
         columnDefs:[
             {
@@ -19,7 +19,7 @@ $(document).ready(function() {
         ],
         select:{
             style: 'multiple',
-            selector: 'td:first-child'
+            selector: 'td:first-child',
         },
         pageLength: 5,
         dom:'Bfrtip',
@@ -87,7 +87,10 @@ $(document).ready(function() {
                 rows:"%d baris telah dipilih"
             }
         }
-    })
+    }
+
+    function dataTables(dataTablesString, dataTablesParams){
+        var dataTables = $(dataTablesString).DataTable(dataTablesParams);
 
         dataTables.button().add(3, {
             attr: {
@@ -98,10 +101,13 @@ $(document).ready(function() {
         });
 
         $(`#dataTables_wrapper input[type=search]`).addClass('form-control form-control-sm');
+    }
+
+    dataTables(dataTablesString, dataTablesParams);
 
         var data = null;
         $('#hapussemua').click( function () {
-            dataTables.rows('.selected').remove().draw();
+            $('#dataTables tbody tr.selected').remove();
         });
 
         $("#addBarang").click(function(event) {
@@ -111,6 +117,70 @@ $(document).ready(function() {
         $("#showBarang").click(function(event) {
             //
             location.href = '/admin/barang'
+        });
+        $("#loadBarang").click(function(event) {
+            //
+            var This = $(this);
+            This.toggleClass('fa-spin');
+
+            if(This.hasClass('fa-spin'))
+            {
+                $(dataTablesString).DataTable().destroy();
+                $('#dataTables tbody tr').remove()
+
+                $.ajax({
+                    url: '/admin/barang/loadBarang',
+                    success: function(data)
+                    {
+                        var data = $.parseJSON(data);
+                        var token = data.token;
+
+                        var iteration = 1;
+                        $.each(data, function(index, el){
+                            console.log(el.nama);
+                            var html = `
+                                <tr>
+                                    <td></td>
+                                    <td>${iteration++}</td>
+                                    <td>${el.nama}</td>
+                                    <td>${el.harga_jual}</td>
+                                    <td>${el.stok}</td>
+                                    <td>
+                                        <button
+                                        class="btn btn-default btn-sm btn-gambar"
+                                        data-toggle="modal"
+                                        data-target="#gambarModal"
+                                        data-local="#carousel-generic"
+                                        data-link="${el.gambar}"
+                                        data-gambar-nama="${el.nama}">
+                                       <i class="far fa-eye"></i> Show
+                                   </button>
+                                    </td>
+                                    <td>
+                                        <span class="btn-group btn-group-sm">
+                                       <a href="/admin/barang/${el.id}/edit" class="btn btn-primary btn-sm">
+                                           <i class="far fa-edit"></i>
+                                       </a>
+                                       <form id="formDelete" action="/admin/barang/${el.id}" method="post">
+                                           <input type="hidden" name="_token" value="${data.token}">
+                                           <input type="hidden" name="_method" value="DELETE">
+                                       </form>
+                                       <button form="formDelete" class="btn btn-danger btn-sm btn-delete" type="submit" data-token="${data.token}" data-nama="${el.nama}"> <i class="far fa-trash-alt"></i>
+
+                                   </button>
+
+                                   </span>
+                                    </td>
+                                </tr>
+                            `;
+
+                            $('#dataTables tbody').append(html);
+                        })
+
+                        dataTables(dataTablesString, dataTablesParams);
+                    }
+                })
+            }
         });
 
     //library sweetalert

@@ -101,4 +101,13 @@ class BarangController extends Controller
         //
         return $this->settingan->setDestroy($barang);
     }
+
+    public function loadBarang()
+    {
+        // dd('oke');
+        $barang = new barang();
+        $dataBarang = $barang->all();
+        $dataBarang['token'] = csrf_token();
+        return json_encode($dataBarang);
+    }
 }

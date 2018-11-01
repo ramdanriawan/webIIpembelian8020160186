@@ -17,6 +17,9 @@
                         </div>
                         <div class="col-6">
                             <span class="float-right">
+                                <button  id='loadBarang' class='btn btn-default btn-circle'>
+                                    <i class='fas fa-sync fa-lg'></i>
+                                </button>
                                 <button  id='addBarang' class='btn btn-success btn-circle'>
                                     <i class='fas fa-plus-circle fa-lg'></i>
                                 </button>
