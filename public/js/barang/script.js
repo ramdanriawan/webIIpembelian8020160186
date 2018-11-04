@@ -1,4 +1,25 @@
 $(document).ready(function() {
+    //library accounting js
+    // Settings object that controls default parameters for library methods:
+    accounting.settings = {
+    	currency: {
+    		symbol : "Rp",   // default currency symbol is '$'
+    		format: "%s%v", // controls output: %s = symbol, %v = value/number (can be object: see below)
+    		decimal : ",",  // decimal point separator
+    		thousand: ".",  // thousands separator
+    		precision : 2   // decimal places
+    	},
+    	number: {
+    		precision : 0,  // default precision on numbers is 0
+    		thousand: ".",
+    		decimal : ","
+    	}
+    }
+
+    $.each($('.tdHargaJual'), function(index, el){
+        $('.tdHargaJual').eq(index).text(accounting.formatMoney($('.tdHargaJual').eq(index).text()));
+    })
+
     //library dataTables
     var dataTablesString = '#dataTables';
     var dataTablesParams = {
@@ -21,7 +42,7 @@ $(document).ready(function() {
             style: 'multiple',
             selector: 'td:first-child',
         },
-        pageLength: 5,
+        pageLength: 10,
         dom:'Bfrtip',
         buttons: [
             {
@@ -31,7 +52,6 @@ $(document).ready(function() {
                 attr: {
                     style:'background-color:#339af0;'
                 }
-
             },
             {
                 extend: "excelHtml5",
@@ -84,7 +104,7 @@ $(document).ready(function() {
                 last: "Halaman terakhir"
             },
             select:{
-                rows:"%d baris telah dipilih"
+                rows:""
             }
         }
     }
@@ -126,14 +146,14 @@ $(document).ready(function() {
             if(This.hasClass('fa-spin'))
             {
                 $(dataTablesString).DataTable().destroy();
+                $('#dataTables tbody tr').hide(300)
                 $('#dataTables tbody tr').remove()
 
                 $.ajax({
                     url: '/admin/barang/loadBarang',
                     success: function(data)
                     {
-                        var data = $.parseJSON(data);
-                        var token = data.token;
+                        var data = $.parseJSON($.parseJSON(JSON.stringify(data)));
 
                         var iteration = 1;
                         $.each(data, function(index, el){
@@ -141,7 +161,7 @@ $(document).ready(function() {
                             var html = `
                                 <tr>
                                     <td></td>
-                                    <td>${iteration++}</td>
+                                    <th class='text-center'>${iteration++}</th>
                                     <td>${el.nama}</td>
                                     <td>${el.harga_jual}</td>
                                     <td>${el.stok}</td>
@@ -174,7 +194,11 @@ $(document).ready(function() {
                                 </tr>
                             `;
 
-                            $('#dataTables tbody').append(html);
+                            if(data.token != el)
+                            {
+                                $('#dataTables tbody').append(html);
+                            }
+
                         })
 
                         dataTables(dataTablesString, dataTablesParams);
@@ -210,9 +234,9 @@ $(document).ready(function() {
                                   'Data telah dihapus.',
                                   'success'
                               );
-                        location.reload();
                     }
                 })
+                location.reload();
               }
             })
     });

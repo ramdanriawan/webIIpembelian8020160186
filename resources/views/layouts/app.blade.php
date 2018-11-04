@@ -38,6 +38,9 @@
     <script src="{{asset('node_modules/sweetalert2/dist/sweetalert2.all.min.js')}}" charset="utf-8"></script>
     <link rel="stylesheet" href="{{asset('node_modules/sweetalert2/dist/sweetalert2.min.css')}}">
 
+    {{--  Accounting js --}}
+    <script src="{{asset('js/accounting.min.js')}}" charset="utf-8"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">

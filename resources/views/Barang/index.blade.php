@@ -56,8 +56,8 @@
                                 <td></td>
                                 <th class='text-center'>{{ $loop->iteration }}</th>
                                <td><a href="/admin/barang/{{$barang->id}}">{{ $barang->nama }}</a></td>
-                               <td>{{ $barang->harga_jual }}</td>
-                               <td>{{ $barang->stok }}</td>
+                               <td class='tdHargaJual'>{{ $barang->harga_jual }}</td>
+                               <td class='tdStok'>{{ $barang->stok }}</td>
                                <td>
                                    <button
                                     class="btn btn-default btn-sm btn-gambar"
