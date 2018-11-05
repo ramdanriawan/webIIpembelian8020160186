@@ -23,7 +23,7 @@ class Settingan extends Model
             'pelanggan' => [
                 'nama' => 'required|min:2|max:50|alpha|present:alpha', //alpha sebagai penanda saja untuk pembuangan spasi pada method setValidate();
                 'alamat' => 'required|min:30|max:255|present:address|regex:/[a-zA-Z0-9\.\,]/' //address sebagai penanda saja untuk pembuangan spasi pada method setValidate();
-                ]
+            ]
         ];
 
         //digunakan untuk memvalidasi data yang menggunakan banyak spasi misalnya data nama dan address users
@@ -113,6 +113,8 @@ class Settingan extends Model
         //nilai untuk redirect halaman setelah berhasil menghapus data
         $this->redirectSetDestroy = back();#->halaman index
 
+        //untuk mengatur apakah hasil dari tabel akan ditampilkan ascending atau descending
+        $this->orderByDefault = 'desc';
 
     }
 
@@ -129,7 +131,7 @@ class Settingan extends Model
 
     public function setIndex()
     {
-        $this->indexDatas = $this->model->paginate($this->paginate);
+        $this->indexDatas = $this->model->orderBy('id', $this->orderByDefault)->get();
 
         $this->allData[$this->datas] = $this->indexDatas;
 
@@ -143,6 +145,7 @@ class Settingan extends Model
 
     public function setStore($request)
     {
+
         //validasi input
         $request = $this->setValidate($request);
 

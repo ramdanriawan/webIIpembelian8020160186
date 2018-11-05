@@ -24,6 +24,7 @@ class BarangController extends Controller
     public function index()
     {
         //
+
         $this->settingan->allData['judul'] = 'halaman gue';
         return $this->settingan->setIndex();
     }
@@ -106,7 +107,7 @@ class BarangController extends Controller
     {
         // dd('oke');
         $barang = new barang();
-        $dataBarang = $barang->all();
+        $dataBarang = $barang->orderBy('id', $this->settingan->orderByDefault)->get();
         $dataBarang['token'] = csrf_token();
         return json_encode($dataBarang);
     }

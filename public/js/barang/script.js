@@ -16,9 +16,15 @@ $(document).ready(function() {
     	}
     }
 
-    $.each($('.tdHargaJual'), function(index, el){
-        $('.tdHargaJual').eq(index).text(accounting.formatMoney($('.tdHargaJual').eq(index).text()));
-    })
+    //function format money dari accounting js
+    function formatMoney()
+    {
+        $.each($('.tdHargaJual'), function(index, el){
+            $('.tdHargaJual').eq(index).text(accounting.formatMoney($('.tdHargaJual').eq(index).text()));
+        })
+    }
+
+    formatMoney();
 
     //library dataTables
     var dataTablesString = '#dataTables';
@@ -55,7 +61,9 @@ $(document).ready(function() {
             },
             {
                 extend: "excelHtml5",
-                exportOptions: {columns: [1,2,3,4]},
+                exportOptions: {
+                    columns: [1,2,3,4]
+                },
                 text: `<i class='far fa-file-excel fa-lg'></i>`,
                 attr: {
                     style:'background-color:#51cf66;'
@@ -130,10 +138,10 @@ $(document).ready(function() {
             $('#dataTables tbody tr.selected').remove();
         });
 
-        $("#addBarang").click(function(event) {
-            //
-            location.href = '/admin/barang/create'
-        });
+        // $("#addBarang").click(function(event) {
+        //     //
+        //     location.href = '/admin/barang/create'
+        // });
         $("#showBarang").click(function(event) {
             //
             location.href = '/admin/barang'
@@ -153,7 +161,7 @@ $(document).ready(function() {
                     url: '/admin/barang/loadBarang',
                     success: function(data)
                     {
-                        var data = $.parseJSON($.parseJSON(JSON.stringify(data)));
+                        var data = $.parseJSON(data);
 
                         var iteration = 1;
                         $.each(data, function(index, el){
@@ -162,9 +170,9 @@ $(document).ready(function() {
                                 <tr>
                                     <td></td>
                                     <th class='text-center'>${iteration++}</th>
-                                    <td>${el.nama}</td>
-                                    <td>${el.harga_jual}</td>
-                                    <td>${el.stok}</td>
+                                    <td><a href="/admin/barang/${el.id}">${el.nama}</a></td>
+                                    <td class='tdHargaJual'>${el.harga_jual}</td>
+                                    <td class='tdStok'>${el.stok}</td>
                                     <td>
                                         <button
                                         class="btn btn-default btn-sm btn-gambar"
@@ -201,14 +209,16 @@ $(document).ready(function() {
 
                         })
 
+                        formatMoney();
                         dataTables(dataTablesString, dataTablesParams);
+                        This.toggleClass('fa-spin');
                     }
                 })
             }
         });
 
     //library sweetalert
-    $('.btn-delete').click(function(event){
+    $(document).on('click', '.btn-delete', function(event){
         event.preventDefault();
         swal({
               title: `Hapus data ${$(this).attr('data-nama')} ?`,
@@ -234,15 +244,15 @@ $(document).ready(function() {
                                   'Data telah dihapus.',
                                   'success'
                               );
+                              setInterval(location.reload(), 1000);
                     }
                 })
-                location.reload();
               }
             })
     });
 
     //script untuk menampilkan gambar di modal
-    $('.btn-gambar').click(function(){
+    $(document).on('click', '.btn-gambar', function(){
         $('#gambarItem').empty();
         $('#dataGambarNama').text($(this).attr('data-gambar-nama'));
         var This = $(this);
